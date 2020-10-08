@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block head %} 
+<title>Cab Fare Prediction</title>
+{% endblock %}
+
+{% block body %} 
+    <br><br>
+    
+    
+    <main role="main">
+        <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
+            <div class="col-md-50 px-50">
+                <h1 class="display-4 font-italic">Upload The Data To Predict</h1>
+                <h2 class="lead my-3">( .CSV Format )</h2>
+                <br><br>
+                
+                <form method=post enctype=multipart/form-data >
+                    <input style="text-align:center" class="btn btn-primary " type=file name=file>
+                    <input class="btn btn-success " type=submit value=Upload>
+                </form>
+                <br><br>
+                {% if shape %}
+                    <h2 style="text-align:center">Shape of the Data is: {{ shape }}</h2>
+                                        
+                {% endif %}
+               </div>
+        </div>
+          
+    </main> 
+    
+    {% if d|length  %}
+        <div>
+
+            <h1 style="display:inline">Predictions : </h1>
+            <a style="display:inline" class="btn btn-success float-right" href="/csv" role="button">Download predictions.csv &raquo;</a>
+        </div> 
+        <table style="text-align:center">
+            <tr>
+                <th style="text-align:center">Pickup Datetime</th>
+                <th style="text-align:center">Pickup Longitude</th>
+                <th style="text-align:center">Pickup Latitude</th>
+                <th style="text-align:center">Dropoff Longitude</th>
+                <th style="text-align:center">Dropoff Latitude</th>
+                <th style="text-align:center">Passenger Count</th>
+                <th style="text-align:center">Fare Amount</th>
+            </tr>
+            
+            {%for i in d%}
+                <tr>
+                    <td>{{ i[0] }}</td>
+                    <td>{{ i[1]}}</td>
+                    <td>{{ i[2]}}</td>
+                    <td>{{ i[3]}}</td>
+                    <td>{{ i[4]}}</td>
+                    <td>{{ i[5]}}</td>
+                    <td>{{ i[6]}}</td>
+                </tr>
+            {%endfor%}
+        </table>
+    {% endif %}
+    
+    <br><br>
+            
+    
+{% endblock %}
+
+
